@@ -20,7 +20,7 @@
 set -eo pipefail
 
 # Default to the latest released ESPv2 version.
-BASE_IMAGE_NAME="eu.gcr.io/endpoints-release/endpoints-runtime-serverless"
+BASE_IMAGE_NAME="gcr.io/endpoints-release/endpoints-runtime-serverless"
 ESP_TAG="2"
 
 function error_exit() {
