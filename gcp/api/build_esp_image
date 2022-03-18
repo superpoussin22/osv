@@ -20,7 +20,7 @@
 set -eo pipefail
 
 # Default to the latest released ESPv2 version.
-BASE_IMAGE_NAME="gcr.io/endpoints-release/endpoints-runtime-serverless"
+BASE_IMAGE_NAME="eu.gcr.io/endpoints-release/endpoints-runtime-serverless"
 ESP_TAG="2"
 
 function error_exit() {
@@ -98,7 +98,7 @@ USER envoy
 ENTRYPOINT ["/env_start_proxy.py"]
 EOF
 
-NEW_IMAGE="gcr.io/${PROJECT}/endpoints-runtime-serverless:${ESP_FULL_VERSION}-${SERVICE}-${CONFIG_ID}"
+NEW_IMAGE="eu.gcr.io/${PROJECT}/endpoints-runtime-serverless:${ESP_FULL_VERSION}-${SERVICE}-${CONFIG_ID}"
 echo "IMAGE: $NEW_IMAGE"
 gcloud builds submit --tag "${NEW_IMAGE}" . --project="${PROJECT}"
 )
