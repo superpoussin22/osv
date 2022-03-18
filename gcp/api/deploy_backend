@@ -1,20 +1,22 @@
 #!/bin/bash
 
-if [ $# -lt 2 ]; then
-  echo "Usage: $0 <tag> <service-name>"
+if [ $# -lt 4 ]; then
+  echo "Usage: $0 <tag> <service-name> <project-name> <region>"
   exit 1
 fi
 
 tag=$1
-name=$2
+service_name=$2
+project_name=${3:-osv_srv}
+region_name=${4:-europe-west1}
 
 rm -rf osv
 cp -r ../../lib/osv .
-docker build -t "gcr.io/oss-vdb/osv-server:$tag" . &&
-docker push "gcr.io/oss-vdb/osv-server:$tag"
+docker build -t "eu.gcr.io/$project_name/osv-server:$tag" . &&
+docker push "eu.gcr.io/$project_name/osv-server:$tag"
 
-gcloud run deploy $name \
+gcloud run deploy $service_name \
   --platform managed \
-  --project=oss-vdb \
-  --region=us-central1 \
-  --image="gcr.io/oss-vdb/osv-server:$tag"
+  --project=$project_name \
+  --region=$region_name \
+  --image="eu.gcr.io/$project_name/osv-server:$tag"
