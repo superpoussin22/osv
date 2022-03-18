@@ -12,7 +12,7 @@ project_name=$4
 region_name=${4:-europe-west1}
 this_dir=$(dirname "$(readlink -f "$0")")
 
-gcloud endpoints services deploy api_descriptor.pb $3 --project=$project_name
+gcloud endpoints services deploy api_descriptor.pb $api_config --project=$project_name
 config_id=$(curl -H "Authorization: Bearer $(gcloud auth print-access-token)" \
             https://servicemanagement.googleapis.com/v1/services/$api/configs | \
             jq -r '.serviceConfigs[0].id')
