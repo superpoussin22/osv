@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM gcr.io/google_appengine/python
+FROM eu.gcr.io/google_appengine/python
 
 RUN virtualenv -p python3.7 /env
 
